@@ -1,0 +1,451 @@
+@font-face {
+  font-family: "PT Sans";
+  src: url("./fonts/PTSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/Montserrat-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./fonts/Lato-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+   Убираем внутренние отступы слева тегам списков,
+   у которых есть атрибут class
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+   Убираем внешние отступы body и двум другим тегам,
+   у которых есть атрибут class
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+   Убираем внешние отступы вертикали нужным тегам,
+   у которых есть атрибут class
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+   Убираем стандартный маркер маркированному списку,
+   у которого есть атрибут class
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+   Обнуляем вертикальные внешние отступы параграфа,
+   объявляем локальную переменную для внешнего отступа вниз,
+   чтобы избежать взаимодействие с более сложным селектором
+  */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+   Внешний отступ вниз для параграфа без атрибута class,
+   который расположен не последним среди своих соседних элементов
+  */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+   Упрощаем работу с изображениями
+  */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+   Наследуем свойства шрифт для полей ввода
+  */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  height: 100%;
+}
+
+/**
+   Плавный скролл
+  */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  min-height: 100%;
+  /**
+     Унифицированный интерлиньяж
+    */
+  line-height: 1.5;
+}
+
+/**
+   Приводим к единому цвету svg-элементы
+  */
+svg *[fill] {
+  fill: currentColor;
+}
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+   Удаляем все анимации и переходы для людей,
+   которые предпочитают их не использовать
+  */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+}
+.modal {
+  max-width: 754px;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  border: none;
+  background-color: inherit;
+  scrollbar-width: none;
+}
+.modal-button {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  text-align: center;
+  border: 1px solid #e5266e;
+  background-color: #ffffff;
+  max-width: 147px;
+  height: 48px;
+  width: 100%;
+  border-radius: 6px;
+  color: #e5266e;
+  transition: 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+}
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.25);
+}
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #666666;
+  z-index: -1;
+}
+.modal__inner {
+  padding: 53px 98px;
+  background-color: #ffffff;
+  border: 1px solid #0c1014;
+  border-radius: 12px;
+  margin: 20px;
+}
+
+.modal__text p {
+  color: #0c1014;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 35px;
+}
+.form input {
+  height: 56px;
+  padding: 16px 35px 16px 16px;
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+  border: 1px solid #d6dade;
+  border-radius: 2px;
+  color: #0c1014;
+}
+.form__header {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 32px;
+}
+
+.form__list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+.form__header .form__list {
+  max-width: 362px;
+}
+.form__item_required {
+  position: relative;
+}
+.form__item_required input {
+  padding: 22px 16px 8px 16px;
+}
+.form__item_required span {
+  color: red;
+  margin-right: 2px;
+}
+.form__item_required label {
+  display: block;
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  color: #6a6e72;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.preview {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+}
+.preview span {
+  color: red;
+}
+.preview p {
+  color: #6a6e72;
+  margin: 0;
+}
+.preview-container {
+  width: 165px;
+  height: 175px;
+}
+.preview img {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.preview input {
+  background-color: inherit;
+  border: none;
+}
+.dialog-icon {
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: fit-content;
+  height: auto;
+  background-color: inherit;
+  border: none;
+}
+.close-preview {
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 55px;
+  padding: 0;
+  justify-content: center;
+  background: url("./images/close.svg") no-repeat center;
+  background-color: #ffffff;
+  width: 36px;
+  height: 36px;
+}
+.upload-dialog {
+  position: absolute;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  background-color: inherit;
+  border: none;
+  color: #fcfcfc;
+  text-decoration: underline #ffffff;
+  left: 50%;
+  font-size: 18px;
+  line-height: 28px;
+}
+.preview-image {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.form__item_required select {
+  width: 100%;
+  height: 56px;
+  padding: 22px 16px 8px 16px;
+  font-size: 16px;
+  border-radius: 2px;
+  border: 1px solid #d6dade;
+  appearance: none;
+  background: url("./images/select_icon.svg") no-repeat right;
+  background-position-x: calc(100% - 16px);
+}
+.form__item {
+  position: relative;
+}
+.form__item img {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translate(-50%, -50%);
+  max-width: 20px;
+  max-height: 20px;
+  width: 100%;
+}
+.form__socials {
+  margin-bottom: 50px;
+}
+.form__btn {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form__btn input,
+button:hover {
+  cursor: pointer;
+}
+.form__btn input {
+  background-color: #e5266e;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "Lato";
+  font-weight: 600;
+  border-radius: 4px;
+}
+.form__btn button {
+  width: fit-content;
+  margin: 0 auto;
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  color: #0848c0;
+}
+
+@media (max-width: 745px) {
+  .modal__inner {
+    padding: 30px 30px;
+  }
+  .form__header {
+    gap: 20px;
+  }
+  .form__header .form__list {
+    max-width: 500px;
+  }
+  .preview p {
+    font-size: 14px;
+  }
+  .preview {
+    width: 165px;
+    height: auto;
+  }
+  .preview-container {
+    width: 165px;
+    height: 175px;
+  }
+}
+
+@media (max-width: 560px) {
+  .modal__text p {
+    font-size: 28px;
+    text-align: center;
+  }
+  .form__header {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .preview p {
+    font-size: 16px;
+  }
+  .upload-dialog {
+    font-size: 14px;
+    line-height: 20px;
+    top: 65%;
+  }
+}
+@media (max-width: 560px) {
+  .modal__text p {
+    font-size: 24px;
+  }
+  .modal__inner {
+    padding: 15px;
+  }
+  .modal__text p {
+    margin-bottom: 20px;
+  }
+}

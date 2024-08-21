@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TestTask</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button
+      id="openModal"
+      class="modal-button"
+      title="Оставить контактные данные"
+    >
+      Написать
+    </button>
+    <dialog id="modal" class="modal">
+      <div class="modalBackdrop hidden"></div>
+      <div class="modal__inner">
+        <div class="modal__text">
+          <p>Стать партнёром проекта</p>
+        </div>
+        <form action="#" class="form">
+          <div class="form__header">
+            <ul class="form__list">
+              <li class="form__item form__item_required">
+                <input type="text" name="login" id="login" required />
+                <label for="login"><span>✱</span>Название организации</label>
+              </li>
+              <li class="form__item form__item_required">
+                <label for="login"><span>✱</span>Телефон</label>
+                <input
+                  type="tel"
+                  name="tel"
+                  id="tel"
+                  class="tel"
+                  placeholder="+7 999 999-99-99"
+                  required
+                />
+              </li>
+              <li class="form__item form__item_required">
+                <label for="login"><span>✱</span>E-mail</label>
+                <input type="email" name="email" id="email" required />
+              </li>
+            </ul>
+            <div class="preview">
+              <p><span>✱</span>Логотип (jpeg, png)</p>
+              <div id="preview-container" class="preview-container">
+                <button id="dialog-icon" class="dialog-icon">
+                  <img src="./images/upload.svg" alt="" />
+                </button>
+                <button id="close-preview" class="close-preview"></button>
+                <button class="upload-dialog" id="upload-dialog">
+                  Выберите файл
+                </button>
+                <input
+                  type="file"
+                  id="image-file"
+                  accept="image/jpg,image/png"
+                  style="display: none"
+                />
+                <img
+                  class="preview-image"
+                  id="preview-image"
+                  src="./images/Ellipse 44.png"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form__socials">
+            <ul class="form__list">
+              <li class="form__item form__item_required">
+                <label for="login"><span>✱</span>Направление</label>
+                <select name="" id="" class="">
+                  <option value="">Экология</option>
+                </select>
+              </li>
+              <li class="form__item">
+                <input type="url" /><img src="./images/internet.svg" alt="" />
+              </li>
+              <li class="form__item">
+                <input type="url" /><img src="./images/vk.svg" alt="" />
+              </li>
+              <li class="form__item">
+                <input type="url" /><img
+                  src="./images/odnoklassniki.svg"
+                  alt=""
+                />
+              </li>
+              <li class="form__item">
+                <input type="url" /><img src="./images/facebook.svg" alt="" />
+              </li>
+              <li class="form__item">
+                <input type="url" /><img src="./images/instagram.svg" alt="" />
+              </li>
+              <li class="form__item">
+                <input type="url" /><img src="./images/youtube.svg" alt="" />
+              </li>
+              <li class="form__item form__item_required">
+                <input type="text" name="name" />
+                <label for="name">Руководитель</label>
+              </li>
+            </ul>
+          </div>
+          <div class="form__btn">
+            <input type="submit" value="Стать партнёром проекта" />
+            <button id="closeModal">Отменить</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+    <script src="./js/test.js"></script>
+  </body>
+</html>
